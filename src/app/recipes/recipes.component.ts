@@ -10,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecipesComponent implements OnInit {
   selectedRecipe:Recipe;
-  constructor() { }
+  constructor(private recipeService:RecipeService) {
 
+  }
+
+  // Subscribe to the event on init
   ngOnInit(): void {
+    this.recipeService.recipeselected.subscribe(
+      (recipe:Recipe)=> {
+        this.selectedRecipe = recipe;
+      }
+      )
   }
 
 }

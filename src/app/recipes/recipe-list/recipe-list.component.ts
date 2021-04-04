@@ -10,7 +10,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class RecipeListComponent implements OnInit {
   recipes: Recipe[] ;
   private recipeService: RecipeService;
-  @Output() recipeWasSelected = new EventEmitter<Recipe>();
+
   // Add Service in constructor
   constructor(recipeService:RecipeService) {
     this.recipeService = recipeService;
@@ -21,8 +21,5 @@ export class RecipeListComponent implements OnInit {
     this.recipes = this.recipeService.getRecipes();
   }
 
-  onRecipeSelected(recipe:Recipe){
-    this.recipeWasSelected.emit(recipe);
-  }
 
 }

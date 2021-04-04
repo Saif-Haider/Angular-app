@@ -1,8 +1,10 @@
 import { Recipe } from './recipe.model';
-import { Injectable } from "@angular/core";
+import { EventEmitter, Injectable } from "@angular/core";
 
 @Injectable()
 export class RecipeService{
+
+  recipeselected = new EventEmitter<Recipe>();
   private recipes: Recipe[] = [
     new Recipe('Chicken Biryani','this is a biryani','https://www.thehealthsite.com/wp-content/uploads/2018/10/Chicken-biryani-recipe.jpg'),
     new Recipe('Chicken Manchurian ','this is a Chicken Manchurian ',
