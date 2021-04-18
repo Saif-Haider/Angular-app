@@ -17,8 +17,8 @@ export class RecipeEditComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(
       (params:Params)=>{
-        this.id = +params['id'];
-        this.editMode = params['id'] =!null;
+        this.id = params['id'];
+        this.editMode = params['id'] !=null;
         this.initForm();
       }
     )
@@ -40,6 +40,10 @@ export class RecipeEditComponent implements OnInit {
      'imagePath':new FormControl(recipeImagePath),
      'description':new FormControl(recipeDescription)
    });
+  }
+
+  onSubmit(){
+   console.log(this.recipeForm);
   }
 
 }
