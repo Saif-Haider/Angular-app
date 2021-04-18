@@ -14,7 +14,7 @@
       <div class="row">
         <div class="col-xs-12">
           <button class="btn btn-success" type="submit" [disabled]="!f.valid"> {{editmode ? 'Update':'Add'}} </button> &nbsp;
-          <button class="btn btn-danger" type="button"> Delete </button> &nbsp;
+          <button class="btn btn-danger" [disabled]="!editmode" type="button" (click)="onDelete()"> Delete </button> &nbsp;
           <button class="btn btn-info" type="button" (click)="onClear()"> Clear </button>
         </div>
       </div>
