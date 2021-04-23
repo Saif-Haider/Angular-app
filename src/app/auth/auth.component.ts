@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthComponent implements OnInit {
    isLoginMode:Boolean = true;
+   isLoading:Boolean = false;
   constructor(private authService:AuthService) { }
 
   ngOnInit(): void {
@@ -25,11 +26,14 @@ export class AuthComponent implements OnInit {
     if(!this.isLoginMode){
       const email = form.value.email;
       const password = form.value.password;
+      this.isLoading = true;
       this.authService.signUp(email,password).subscribe(
         resData =>{
           console.log(resData);
+          this.isLoading = false;
         },error=>{
           console.log(error);
+          this.isLoading = false;
 
         }
       );
