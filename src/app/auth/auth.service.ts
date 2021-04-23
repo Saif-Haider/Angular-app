@@ -1,8 +1,9 @@
+import { User } from './user.model';
 import { RecipeConstants } from './../shared/url.enum';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { throwError, Subject } from 'rxjs';
 
 
 export interface AuthResponseData {
@@ -19,6 +20,8 @@ export interface AuthResponseData {
 })
 export class AuthService {
 
+  user = new Subject<User>();
+
   constructor(private http: HttpClient) { }
 
   signUp(email: string, password: string) {
@@ -27,7 +30,11 @@ export class AuthService {
       password: password,
       returnSecureToken: true
     })
-    .pipe(catchError(this.handleError));
+    .pipe(catchError(this.handleError),tap(
+      resData=>{
+          this.handleAuthentication(resData);
+      }
+    ));
 
 }
 
@@ -37,7 +44,11 @@ login(email:string,password:string){
     password: password,
     returnSecureToken: true
   })
-  .pipe(catchError(this.handleError));
+  .pipe(catchError(this.handleError),tap(
+    resData=>{
+        this.handleAuthentication(resData);
+    }
+  ));
 }
 
 private handleError(errorRes:HttpErrorResponse){
@@ -65,6 +76,13 @@ private handleError(errorRes:HttpErrorResponse){
   }
 
   return throwError(errorMessge);
+}
+
+private handleAuthentication(resData:AuthResponseData){
+  const expirationDate = new Date(new Date().getTime() +  +resData.expiresIn*1000);
+  const user = new User(resData.email,resData.localId,resData.idToken,expirationDate);
+
+  this.user.next(user);
 }
 
 }
