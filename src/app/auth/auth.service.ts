@@ -5,12 +5,13 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 
-interface AuthResponseData {
+export interface AuthResponseData {
   idToken: string;
   email: string;
   refreshToken: string;
   expiresIn: string;
   localId: string;
+  registered? :Boolean;
 }
 
 @Injectable({
@@ -49,6 +50,14 @@ export class AuthService {
     })
     );
 
+}
+
+login(email:string,password:string){
+  return this.http.post<AuthResponseData>(RecipeConstants.FIREBASE_LOGIN + RecipeConstants.FIREBASE_KEY,{
+    email: email,
+    password: password,
+    returnSecureToken: true
+  })
 }
 
 }
