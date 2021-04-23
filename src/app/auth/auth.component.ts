@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
+
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -21,6 +22,7 @@ export class AuthComponent implements OnInit {
     this.isLoginMode = !this.isLoginMode;
   }
   onSubmit(form:NgForm){
+    this.error = null;
     if(!form.valid){
       return ;
     }
