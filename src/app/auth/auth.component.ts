@@ -37,6 +37,7 @@ export class AuthComponent implements OnInit {
       authObserve =  this.authService.signUp(email,password);
     }
     else{
+      this.isLoading = true;
       authObserve =  this.authService.login(email,password);
     }
 
