@@ -19,7 +19,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   signUp(email: string, password: string) {
-    return this.http.post<AuthResponseData>(RecipeConstants.FIREBASE_ENDPOINT + RecipeConstants.FIREBASE_KEY, {
+    return this.http.post<AuthResponseData>(RecipeConstants.FIREBASE_AUTH + RecipeConstants.FIREBASE_KEY, {
       email: email,
       password: password,
       returnSecureToken: true
