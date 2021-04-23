@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError, BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 export interface AuthResponseData {
@@ -23,7 +24,7 @@ export class AuthService {
   user = new BehaviorSubject<User>(null);
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private router:Router) { }
 
   signUp(email: string, password: string) {
     return this.http.post<AuthResponseData>(RecipeConstants.FIREBASE_AUTH + RecipeConstants.FIREBASE_KEY, {
@@ -50,6 +51,11 @@ login(email:string,password:string){
         this.handleAuthentication(resData);
     }
   ));
+}
+
+logout(){
+  this.user.next(null);
+  this.router.navigate(['/auth']);
 }
 
 private handleError(errorRes:HttpErrorResponse){
