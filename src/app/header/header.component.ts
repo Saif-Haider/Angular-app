@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onFetchData(){
-    this.dsService.fetchData();
+    this.dsService.fetchData().subscribe();
   }
 
 
