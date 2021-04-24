@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { User } from './user.model';
 import { RecipeConstants } from './../shared/url.enum';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -27,7 +28,7 @@ export class AuthService {
   constructor(private http: HttpClient,private router:Router) { }
 
   signUp(email: string, password: string) {
-    return this.http.post<AuthResponseData>(RecipeConstants.FIREBASE_AUTH + RecipeConstants.FIREBASE_KEY, {
+    return this.http.post<AuthResponseData>(RecipeConstants.FIREBASE_AUTH + environment.FIREBASE_KEY, {
       email: email,
       password: password,
       returnSecureToken: true
@@ -41,7 +42,7 @@ export class AuthService {
 }
 
 login(email:string,password:string){
-  return this.http.post<AuthResponseData>(RecipeConstants.FIREBASE_LOGIN + RecipeConstants.FIREBASE_KEY,{
+  return this.http.post<AuthResponseData>(RecipeConstants.FIREBASE_LOGIN + environment.FIREBASE_KEY,{
     email: email,
     password: password,
     returnSecureToken: true
