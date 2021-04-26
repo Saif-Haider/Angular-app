@@ -7,7 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { ShoppingListService } from './shopping-list/shopping-list.service';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AuthComponent } from './auth/auth.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
@@ -32,7 +31,7 @@ import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer
     StoreModule.forRoot({shoppingList:shoppingListReducer})
   ],
   providers: [
-   ShoppingListService,
+
    RecipeService,{
      provide:HTTP_INTERCEPTORS,useClass:AuthInterceptorService,multi:true
    }
