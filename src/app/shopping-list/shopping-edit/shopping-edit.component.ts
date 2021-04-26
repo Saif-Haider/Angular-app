@@ -4,7 +4,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import * as ShoppingListActions from '../store/shopping-list.actions';
-import * as fromShoppingList from './../store/shopping-list.reducer';
+import * as fromApp from '../../store/app.reducer';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -17,7 +17,7 @@ export class ShoppingEditComponent implements OnInit,OnDestroy {
    editmode:Boolean=false;
 
    editedItem:Ingredient;
-   constructor(private store:Store<fromShoppingList.AppState>) { }
+   constructor(private store:Store<fromApp.AppState>) { }
 
   ngOnInit(): void {
     this.subscription = this.store.select('shoppingList').subscribe(stateData=>{

@@ -11,8 +11,7 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AuthComponent } from './auth/auth.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import {StoreModule} from '@ngrx/store'
-import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer';
-
+import * as fromApp from './store/app.reducer';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,7 @@ import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer
     HttpClientModule,
     ShoppingListModule,
     SharedModule,
-    StoreModule.forRoot({shoppingList:shoppingListReducer})
+    StoreModule.forRoot(fromApp.appReducer)
   ],
   providers: [
 
